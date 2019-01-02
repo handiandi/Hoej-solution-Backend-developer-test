@@ -10,10 +10,18 @@
 			$this->orders = $this->fetchOrders();
 		}
 
+		/**
+		 * Return the fetched Orders/data from the API resource		 
+		 * @return Array associative array with all orders
+		 */
 		public function getOrders(){
 			return $this->orders;
 		}
 
+		/**
+		 * Fetching the Orders/data from the API resource		 
+		 * @return Array associative array with all orders
+		 */
 		private	function fetchOrders(){
 			$service_url = 'https://hoej.dk/tests/api/orders/';
 			$curl = curl_init($service_url);
@@ -34,7 +42,11 @@
 			return $decoded['orders'];
 		}
 
-
+		/**
+		 * Return only Orders with specific product name
+		 * @param string $target_product	The product name to filter from. 	 
+		 * @return Array associative array with all orders with that product name
+		 */
 		public function getProductByName($target_product){
 		 	$targets = array();
 		 	foreach ($this->orders as $order) {
@@ -50,7 +62,11 @@
 		 	return $targets;
  		}
 
-
+ 		/**
+		 * Return only Orders with parts of specific material
+		 * @param string $target_material	The material name to filter from. 	 
+		 * @return Array associative array with all orders with parts of that material
+		 */
  		public function findMaterialByName($target_material) {
 		 	$targets = array();
 		 	foreach ($this->orders as $order) {
@@ -74,7 +90,10 @@
 		 }
 
 
-
+		 /**
+		 * Return only Orders with no parts	 
+		 * @return Array associative array with all orders with no parts 
+		 */
 		 public function findProductsWithNoParts() {
 		 	$targets = array();
 		 	foreach ($this->orders as $order) {
